@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import { BiLogOut } from 'react-icons/bi';
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -30,24 +33,31 @@ const Header = () => {
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>MERN Auth</Navbar.Brand>
+            <Navbar.Brand>FusionFlow</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
               {userInfo ? (
                 <>
-                  <NavDropdown title={userInfo.name} id='username'>
+                  <div className='d-flex align-items-center'>
+                    <DarkModeOutlinedIcon style={{ color: "white"}}/>
+                    <NavDropdown title={userInfo.name} id='username'>
+               
                     <LinkContainer to='/profile'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
+                    
                     <NavDropdown.Item onClick={logoutHandler}>
-                      Logout
+                      <BiLogOut style={{fontSize: "20px"}}/>
+                     
                     </NavDropdown.Item>
                   </NavDropdown>
+                  </div>
                 </>
               ) : (
                 <>
+
                   <LinkContainer to='/login'>
                     <Nav.Link>
                       <FaSignInAlt /> Sign In
